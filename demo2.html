@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="utf-8" />
+	<title>AKAMI //Curly Borders Plugin Demo</title>
+	<meta name="generator" content="BBEdit 10.5" />
+	
+	<style type="text/css">
+
+		body {
+			background-color: rgb(245,245,245);
+			font-family: Tahoma;
+			font-size: 14px;
+			line-height: 22px;
+			color: rgb(80,80,80);
+			margin: 0;
+			padding: 0;
+		}
+		
+		.curlyborders {
+			position: absolute;
+			overflow: hidden;
+		}
+		
+	</style>
+	
+	<script type="text/javascript" src="lib/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="src/jquery.akami.curlyborders.js"></script>
+	
+	<script type="text/javascript">
+	var resizeTimeout = 0;
+	
+	function sizeDiv() {
+		$('.curlyborders').css({
+			'width': ($(window).width() - 80) + 'px',
+			'height': ($(window).height() - 80) + 'px',
+			'top': '40px',
+			'left': '40px'
+		});
+	}
+	
+	jQuery('document').ready(function(ev) {
+		sizeDiv();	
+		$('.curlyborders').curlyborders();
+		$(window).bind('resize', function() {
+
+			clearTimeout(resizeTimeout);
+			resizeTimeout = setTimeout(function() {
+				$('.border-container ').remove();
+				$('.curlyborders').removeData();
+				sizeDiv();
+				$('.curlyborders').curlyborders();
+			}, 140);
+
+		});
+	});
+	
+	</script>
+	
+</head>
+<body>
+
+	<div class="curlyborders"></div>
+
+</body>
+</html>

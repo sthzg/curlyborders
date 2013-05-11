@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="utf-8" />
+	<title>AKAMI //Curly Borders Plugin Demo</title>
+	<meta name="generator" content="BBEdit 10.5" />
+	
+	<style type="text/css">
+
+		body {
+			background-color: rgb(245,245,245);
+			font-family: Tahoma;
+			font-size: 14px;
+			line-height: 22px;
+			color: rgb(80,80,80);
+		}
+		
+		#demo-container {
+			width: 530px;
+			min-height: 400px;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 40px;
+			overflow: hidden;
+			margin-bottom: 100px;
+		}
+		
+		.inside {
+			padding:5px 30px 5px 100px;
+		}
+		
+	</style>
+	
+	<script type="text/javascript" src="lib/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="src/jquery.akami.curlyborders.js"></script>
+	
+	<script type="text/javascript">
+	
+	jQuery('document').ready(function(ev) {
+		$('.curlyborders').curlyborders({});
+	});
+	
+	</script>
+	
+</head>
+<body>
+
+	<div id="demo-container">
+		
+		<div class="curlyborders">
+			<div class="inside">
+				<h1>Demo Container</h1>
+				<h2>This is a plain an ordinary DIV</h2>
+				<blockquote><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p></blockquote>
+				<p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.</p>
+				<p>Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.</p>
+				<p>Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis,</p>
+				<h3>This is a plain an ordinary DIV</h3>
+				<blockquote><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p></blockquote>
+				<p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.</p>
+				<p>Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.</p>
+				<p>Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis,</p>
+			</div>	
+		</div>
+		
+	</div>
+
+</body>
+</html>
