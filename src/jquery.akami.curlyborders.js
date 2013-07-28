@@ -20,6 +20,31 @@
 						'loaded': 0,
 						'toLoad': 0
 					},
+					
+					/**
+					 * The most interesting attributes for setting up the border 
+					 * behaviour are repeat, freq, freqUnit and pos
+					 * 
+					 * Border segments can be defined to use two units:
+					 * 1| percent
+					 * 2| multiple
+					 *
+					 * Depending on the unit freq defines the length or height
+					 * of the item:
+					 *
+					 * >> percent >> freq means XYZ percent of available space
+					 * >> multiple >> freq means XYZ times the length/height of the item
+					 *
+					 * For example, if you define your top border elements with
+					 * topleft | toprepeat | topright
+					 *
+					 * Her topleft and topright might be two separate border images
+					 * that are setup to be displayed (freq:)1 time as (freqUnit) 'multiple'. 
+					 * The toprepeat segment might span 100% of the space between
+					 * topleft and topright
+					 *
+					 * 
+					 */
 					'borders': {
 						'top': {
 							'orientation': 'horizontal',
@@ -84,7 +109,7 @@
 									'pos': 0,
 									'totalWidth': 0,
 									'totalHeight': 0
-								},
+								},								
 								{
 									'id': 'right',
 									'ext': 'png',
@@ -190,6 +215,7 @@
 									'totalWidth': 0,
 									'totalHeight': 0
 								},
+
 								{
 									'id': 'leftbubble',
 									'ext': 'png',
@@ -203,6 +229,7 @@
 									'totalWidth': 0,
 									'totalHeight': 0
 								},
+								
 								{
 									'id': 'left',
 									'ext': 'png',
@@ -257,8 +284,7 @@
            });
            
            $this.data( 'settings', settings );
-         }
-         
+         }         
 					
 					// check border configuration and set the count of img the prelaoder has to get
 					$.each(settings.borders, function(i, borderside) {
@@ -271,25 +297,30 @@
 					$.each(settings.borders, function(i, borderside) {
 					
 						borderside._offsetLeft = 0;
-			
 						$.each(borderside.items, function(j, segment) {
-							var path = settings.pluginRoot + '/themes/' + settings.theme + '/' + segment.id + '.' + segment.ext;
-							$('<img />').load( function() {
+							var path = settings.pluginRoot + '/themes/' + settings.theme + '/' + segment.id + '.' + segment.ext  + '?c=' + (new Date().getTime());
+
+							console.log(path);
+
+								$('<img />').load( function() {
+										
+									settings.preloader.loaded++;
+									console.log(settings.preloader.loaded);
 									
-								settings.preloader.loaded++;
-								
-								// fill the data store
-								segment.$img = $(this);
-								segment.imgWidth = this.width;
-								segment.imgHeight = this.height;
-								
-								// anything is laoded, start processing
-								if(settings.preloader.loaded === settings.preloader.toLoad) {
-									// call method to start the calculations
-									methods._createBorders($this);
-								}
-								
-							}).attr('src', path);
+									// fill the data store
+									segment.$img = $(this);
+									segment.imgWidth = this.width;
+									segment.imgHeight = this.height;
+									
+									// anything is laoded, start processing
+									if(settings.preloader.loaded === settings.preloader.toLoad) {
+										// call method to start the calculations
+										console.log('pre _createBorders() call');
+										methods._createBorders($this);
+									}
+									
+								}).attr('src', path);
+
 						});
 					});
          
@@ -310,6 +341,7 @@
       * method
       */
 			_createBorders: function($this) {
+				console.log('create');
 				// create markup
 				var s = $this.data('settings');
 				var w = Math.round($this.width() + 2 * s.padding);
@@ -336,6 +368,9 @@
 					'position': 'relative'
 				});
 				
+				
+				// this loop analyses and calculates position values and applies these
+				// to the elements. it runs a two-step rendering process.
 				$.each(s.borders, function(i, borderside) {
 				
 					// reset variables
