@@ -140,6 +140,7 @@ var cbManager = {
 				},			
 				'padding': '0',
 				'paddingUnit': 'px',
+				'boxsizing': 'content'
 			};
 								
 			return this.each(function(key, val) {							
@@ -196,10 +197,22 @@ var cbManager = {
 
 			// create markup
 			var s = $this.data('settings');
-			var w = Math.round($this.width() + 2 * s.padding);
-			var h = Math.round($this.height() + 2 * s.padding);
-			var t = Math.round($this.offset().top - s.padding);
-			var l = Math.round($this.offset().left - s.padding);
+			
+			switch (s.boxsizing) {
+				case 'content':
+					var w = Math.round($this.width() + 2 * s.padding);
+					var h = Math.round($this.height() + 2 * s.padding);
+					var t = Math.round($this.offset().top - s.padding);
+					var l = Math.round($this.offset().left - s.padding);
+					break;
+					
+				case 'border':
+					var w = Math.round($this.width() + 2 * s.padding);
+					var h = Math.round($this.height() + 2 * s.padding);
+					var t = Math.round($this.offset().top);
+					var l = Math.round($this.offset().left);
+					break;
+			}
 			
 			s.canvasWidth = w;
 			s.canvasHeight = h;
